@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api--customer-deployment
+  namespace: shoesclick-eks
+spec:
+  selector:
+    matchLabels:
+      app: api--customer
+  template: 
+    metadata:
+        name: api--customer
+        labels:
+          app: api--customer
+    spec:
+        containers:
+          - name: api--customer-container
+            image: $awsaccountid.dkr.ecr.$awseksregion.amazonaws.com/$awsecrrepository:api--customer-$githash
+            env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "dev"
+              - name: CONFIG_SERVER
+                value: "http://svc-swapiconfigserver.corporativo.svc.cluster.local/config/"
+            ports:
+              - containerPort: 5000
+              - containerPort: 9090
+            livenessProbe:
+              httpGet:
+                path: /actuator/health
+                port: 9090
+              initialDelaySeconds: 120
+              periodSeconds: 60
+              timeoutSeconds: 10
+              successThreshold: 1
+              failureThreshold: 2
+            readinessProbe:
+              httpGet:
+                path: /actuator/health
+                port: 9090
+              initialDelaySeconds: 120
+              periodSeconds: 10
+              timeoutSeconds: 10
