@@ -27,13 +27,6 @@ spring:
       multiplier: 1.5
       compatibility-verifier:
         enabled=false:
-info:
-  app:
-    name: "@project.name@"
-    version: "@project.version@"
-    description: "@project.description@ "
-    base-package: "com.shoesclick.api.customer"
-
   jpa:
     properties:
       hibernate:
@@ -50,6 +43,13 @@ info:
     tomcat:
       max-active: ${SPRING_DATASOURCE_MAX_ACTIVE:10}
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/dbcustomer?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+
+info:
+  app:
+    name: "@project.name@"
+    version: "@project.version@"
+    description: "@project.description@ "
+    base-package: "com.shoesclick.api.customer"
 
 eureka:
   client:
