@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api--customer-deployment
-  namespace: shoesclick-eks
+  namespace: shoes-eks
 spec:
   selector:
     matchLabels:
@@ -15,12 +15,12 @@ spec:
     spec:
         containers:
           - name: api--customer-container
-            image: $awsaccountid.dkr.ecr.$awseksregion.amazonaws.com/$awsecrrepository:api--customer-$githash
+            image: $dck-accountid/$dck-repository:api--customer-$githash
             env:
               - name: SPRING_PROFILES_ACTIVE
                 value: "dev"
               - name: CONFIG_SERVER
-                value: "http://svc-swapiconfigserver.corporativo.svc.cluster.local/config/"
+                value: "http://svc-swapiconfigserver.shoes-eks.svc.cluster.local/config/"
             ports:
               - containerPort: 5000
               - containerPort: 9090
