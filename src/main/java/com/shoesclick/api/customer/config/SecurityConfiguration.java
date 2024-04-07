@@ -20,7 +20,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((authz) ->
-                authz.requestMatchers("/**").hasRole("SITE_SHOES")
+                authz.requestMatchers("/api/**").hasRole("SITE_SHOES")
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
