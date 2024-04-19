@@ -1,5 +1,6 @@
 package com.shoesclick.api.customer.controller;
 
+import com.shoesclick.api.customer.config.CustomerMetrics;
 import com.shoesclick.api.customer.mapper.CustomerMapper;
 import com.shoesclick.api.customer.openapi.controller.CustomerApi;
 import com.shoesclick.api.customer.openapi.model.domain.*;
@@ -19,9 +20,12 @@ public class CustomerApiImpl implements CustomerApi {
 
     private final CustomerMapper customerMapper;
 
-    public CustomerApiImpl(CustomerService customerService, CustomerMapper customerMapper) {
+    private final CustomerMetrics customerMetrics;
+
+    public CustomerApiImpl(CustomerService customerService, CustomerMapper customerMapper, CustomerMetrics customerMetrics) {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
+        this.customerMetrics = customerMetrics;
     }
 
     @Override
@@ -46,7 +50,8 @@ public class CustomerApiImpl implements CustomerApi {
 
     @Override
     public ResponseEntity<StatusResponse> saveCustomer(CustomerRequest customerRequest) {
-        return ResponseEntity.status(201).body(customerMapper.map(customerService.save(customerMapper.map(customerRequest))));
-
+        var response = ResponseEntity.status(201).body(customerMapper.map(customerService.save(customerMapper.map(customerRequest))));
+        customerMetrics.incrementCustomerSuccessCount();
+        return response;
     }
 }

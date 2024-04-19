@@ -1,6 +1,7 @@
 package com.shoesclick.api.customer.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shoesclick.api.customer.config.CustomerMetrics;
 import com.shoesclick.api.customer.entity.Customer;
 import com.shoesclick.api.customer.entity.Status;
 import com.shoesclick.api.customer.exception.ElementNotFoundException;
@@ -29,7 +30,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 class CustomerApiImplTest {
@@ -43,6 +44,9 @@ class CustomerApiImplTest {
 
     @Spy
     private CustomerMapper customerMapper;
+
+    @Mock
+    private CustomerMetrics customerMetrics;
 
     @InjectMocks
     private CustomerApiImpl controller;
@@ -64,6 +68,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isOk());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -76,6 +82,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isNoContent());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -89,6 +97,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isOk());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
 
@@ -104,6 +114,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isNoContent());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -116,6 +128,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isOk());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -128,6 +142,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isNotFound());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -140,6 +156,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isOk());
+
+        verify(customerMetrics, times(0)).incrementCustomerSuccessCount();
     }
 
     @Test
@@ -154,6 +172,8 @@ class CustomerApiImplTest {
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .isCreated());
+
+        verify(customerMetrics, times(1)).incrementCustomerSuccessCount();
     }
 
     private CustomerRequest getCustomerRequest() {
