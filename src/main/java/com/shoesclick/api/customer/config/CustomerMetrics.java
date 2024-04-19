@@ -23,7 +23,7 @@ public class CustomerMetrics {
     }
 
     public void incrementCustomerSuccessCount() {
-        customerErrors.increment();
+        customerProcess.increment();
     }
 
     public void incrementCustomerErrorCount() {
