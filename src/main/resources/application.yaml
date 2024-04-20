@@ -41,7 +41,7 @@ logging:
 
 management:
   server:
-    port: 9190
+    port: 9191
   endpoints:
     web:
       base-path: /actuator
