@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /api--customer
-  port: 5000
+  port: 5001
 spring:
   application:
     name: api--customer
@@ -41,7 +41,7 @@ logging:
 
 management:
   server:
-    port: 9190
+    port: 9191
   endpoints:
     web:
       base-path: /actuator
