@@ -112,11 +112,13 @@
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-api</artifactId>
+			<version>1.25.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporters-jaeger</artifactId>
+			<version>0.9.1</version>
 		</dependency>
 
 		<dependency>
@@ -133,13 +135,6 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>2022.0.4</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.opentelemetry</groupId>
-				<artifactId>opentelemetry-bom</artifactId>
-				<version>1.7.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
