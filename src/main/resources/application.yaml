@@ -37,14 +37,13 @@ info:
 
 logging:
   level:
-    org.springframework.web: DEBUG
-  pattern:
-    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
-
+    org:
+      zalando:
+        logbook: TRACE
 
 management:
   server:
-    port: 9191
+    port: 9291
   endpoints:
     web:
       base-path: /actuator
@@ -60,3 +59,12 @@ management:
         group:
           readiness:
             include: diskSpace
+  tracing:
+    sampling:
+      probability: 0.1
+
+logbook:
+  format:
+    style: json
+    json:
+      condition: true
